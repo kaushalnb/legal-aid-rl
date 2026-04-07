@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-@app.post("/reset")
+@app.post("/openenv/reset")
 def reset():
     return {"status": "reset successful"}
 
