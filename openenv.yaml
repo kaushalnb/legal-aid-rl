@@ -1,0 +1,14 @@
+name: LegalAidRL
+description: AI agent learns to guide users through legal processes
+
+actions:
+  - ask_question
+  - suggest_action
+  - submit_solution
+
+observations:
+  - user_problem
+  - collected_info
+  - progress
+
+reward_range: [0.0, 1.0]
