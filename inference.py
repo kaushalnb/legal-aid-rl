@@ -4,23 +4,30 @@ import uvicorn
 
 app = FastAPI()
 
-# Required env variables
-API_BASE_URL = os.getenv("API_BASE_URL", "")
-MODEL_NAME = os.getenv("MODEL_NAME", "")
-HF_TOKEN = os.getenv("HF_TOKEN")
-
-@app.post("/openenv/reset")
-async def reset(request: Request):
-    data = await request.json()
+async def handle_reset(request: Request):
+    try:
+        data = await request.json()
+    except:
+        data = {}
 
     print("START: Reset called")
-    print("STEP: Processing reset request")
-    print("END: Reset complete")
+    print("STEP: Processing request")
+    print("END: Done")
 
-    return {
-        "status": "ok",
-        "message": "Environment reset successful"
-    }
+    return {"status": "ok"}
+
+# 🔥 SUPPORT ALL ROUTES
+@app.post("/")
+async def root_reset(request: Request):
+    return await handle_reset(request)
+
+@app.post("/reset")
+async def reset1(request: Request):
+    return await handle_reset(request)
+
+@app.post("/openenv/reset")
+async def reset2(request: Request):
+    return await handle_reset(request)
 
 @app.get("/openenv/health")
 def health():
