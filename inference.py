@@ -1,11 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 import uvicorn
 
 app = FastAPI()
 
 @app.post("/openenv/reset")
-def reset():
-    return {"status": "reset successful"}
+async def reset(request: Request):
+    data = await request.json()  # accept body
+    return {
+        "status": "reset successful",
+        "received": data
+    }
 
 @app.get("/openenv/health")
 def health():
